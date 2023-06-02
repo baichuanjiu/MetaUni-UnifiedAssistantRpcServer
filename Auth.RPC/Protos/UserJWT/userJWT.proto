@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option csharp_namespace = "Auth.RPC.UserJWT";
+
+package userJWT;
+
+service Auth {
+  rpc Auth (AuthRequest) returns (AuthReply);
+}
+
+message AuthRequest {
+  int32 UUID = 1;
+  string JWT = 2;
+}
+
+message AuthReply {
+  bool isValid = 1;
+}
