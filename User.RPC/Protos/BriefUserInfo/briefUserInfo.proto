@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option csharp_namespace = "User.RPC.BriefUserInfo";
+
+package briefUserInfo;
+
+service Get {
+  rpc Get (GetRequest) returns (GetReply);
+}
+
+message GetRequest {
+  int32 UUID = 1;
+}
+
+message GetReply {
+  bool isValid = 1;
+  int32 UUID = 2;
+  string avatar = 3;
+  string nickname = 4;
+  string updatedTime = 5;
+}

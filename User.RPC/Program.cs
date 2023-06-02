@@ -1,17 +1,62 @@
-using User.RPC.Services;
+using Consul;
+using Consul.AspNetCore;
+using Serilog;
+using Microsoft.EntityFrameworkCore;
+using User.RPC.Interceptors;
+using User.RPC.Services.HealthCheck;
+using User.RPC.DataContext.User;
+using User.RPC.Services.GetBriefUserInfo;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Additional configuration is required to successfully run gRPC on macOS.
-// For instructions on how to configure Kestrel and gRPC clients on macOS, visit https://go.microsoft.com/fwlink/?linkid=2099682
+//配置gRpc与Interceptor
+builder.Services.AddGrpc(
+    options => options.Interceptors.Add<AuthInterceptor>()
+    );
 
-// Add services to the container.
-builder.Services.AddGrpc();
+//配置Serilog
+var configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+Log.Logger = new LoggerConfiguration().ReadFrom.Configuration(configuration).CreateLogger();
+builder.Host.UseSerilog();
+
+//配置Consul
+builder.Services.AddConsul(options => options.Address = new Uri(builder.Configuration["Consul:Address"]!));
+builder.Services.AddConsulServiceRegistration(options =>
+{
+    options.Check = new AgentServiceCheck()
+    {
+        DeregisterCriticalServiceAfter = TimeSpan.FromSeconds(5), //服务停止运行后多长时间自动注销该服务
+        Interval = TimeSpan.FromSeconds(60), //心跳检查间隔
+        GRPC = builder.Configuration["Consul:IP"]! + ":" + builder.Configuration["Consul:Port"]!, //健康检查地址
+        Timeout = TimeSpan.FromSeconds(10), //超时时间
+    };
+    options.ID = builder.Configuration["Consul:ID"]!;
+    options.Name = builder.Configuration["Consul:Name"]!;
+    options.Address = builder.Configuration["Consul:IP"]!;
+    options.Port = int.Parse(builder.Configuration["Consul:Port"]!);
+});
+
+//配置DbContext
+builder.Services.AddDbContext<UserContext>(options =>
+  options.UseSqlServer(builder.Configuration.GetConnectionString("UserContext")));
+
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+//配置Redis
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-app.MapGrpcService<GreeterService>();
-app.MapGet("/", () => "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
+//使用Serilog处理请求日志
+app.UseSerilogRequestLogging();
+
+//配置gRPC健康检查
+app.MapGrpcService<HealthCheckService>();
+
+//配置gRPC服务
+app.MapGrpcService<GetBriefUserInfoService>();
 
 app.Run();
