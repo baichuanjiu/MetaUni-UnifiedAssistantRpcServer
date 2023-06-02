@@ -5,15 +5,17 @@ VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Auth", "Auth", "{9DC23400-C030-4083-9EC7-E3193FF2362B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Auth.RPC", "Auth.RPC\Auth.RPC.csproj", "{B9610759-AB42-489E-914F-B05CA0B55D2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth.RPC", "Auth.RPC\Auth.RPC.csproj", "{B9610759-AB42-489E-914F-B05CA0B55D2E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "User", "User", "{8F8E8769-5D11-4C87-A3A5-0ED77BD5CB4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "User.RPC", "User.RPC\User.RPC.csproj", "{A536E327-0045-402E-A7E5-911FFEBB4318}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "User.RPC", "User.RPC\User.RPC.csproj", "{A536E327-0045-402E-A7E5-911FFEBB4318}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Message", "Message", "{CAB330E2-9BC1-46C2-8A65-1DFA4F493224}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Message.RPC", "Message.RPC\Message.RPC.csproj", "{9DBF158A-BC11-4D6A-B509-9B8F0A12634D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Message.RPC", "Message.RPC\Message.RPC.csproj", "{9DBF158A-BC11-4D6A-B509-9B8F0A12634D}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{C7E13AC6-7A21-4C4D-B7A4-12EF714D6672}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{9DBF158A-BC11-4D6A-B509-9B8F0A12634D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DBF158A-BC11-4D6A-B509-9B8F0A12634D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DBF158A-BC11-4D6A-B509-9B8F0A12634D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7E13AC6-7A21-4C4D-B7A4-12EF714D6672}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7E13AC6-7A21-4C4D-B7A4-12EF714D6672}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7E13AC6-7A21-4C4D-B7A4-12EF714D6672}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7E13AC6-7A21-4C4D-B7A4-12EF714D6672}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
