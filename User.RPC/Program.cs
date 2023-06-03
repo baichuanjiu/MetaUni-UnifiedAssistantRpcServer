@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore;
 using User.RPC.Interceptors;
 using User.RPC.Services.HealthCheck;
 using User.RPC.DataContext.User;
-using User.RPC.Services.GetBriefUserInfo;
+using User.RPC.Services.BriefUserInfo;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //≈‰÷√gRpc”ÎInterceptor
 builder.Services.AddGrpc(
-    options => options.Interceptors.Add<AuthInterceptor>()
+    //options => options.Interceptors.Add<AuthInterceptor>()
     );
 
 //≈‰÷√Serilog
@@ -57,6 +57,6 @@ app.UseSerilogRequestLogging();
 app.MapGrpcService<HealthCheckService>();
 
 //≈‰÷√gRPC∑˛ŒÒ
-app.MapGrpcService<GetBriefUserInfoService>();
+app.MapGrpcService<BriefUserInfoService>();
 
 app.Run();
