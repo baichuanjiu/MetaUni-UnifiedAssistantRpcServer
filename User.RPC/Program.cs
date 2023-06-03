@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 //≈‰÷√gRpc”ÎInterceptor
 builder.Services.AddGrpc(
-    //options => options.Interceptors.Add<AuthInterceptor>()
+    options => options.Interceptors.Add<AuthInterceptor>()
     );
 
 //≈‰÷√Serilog
