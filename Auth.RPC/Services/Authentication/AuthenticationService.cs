@@ -1,10 +1,10 @@
-﻿using Auth.RPC.UserJWT;
+﻿using Auth.RPC.Protos.Authentication;
 using Grpc.Core;
 using Microsoft.Extensions.Caching.Distributed;
 
 namespace Auth.RPC.Services.Authentication
 {
-    public class AuthenticationService : UserJWT.Auth.AuthBase
+    public class AuthenticationService : Authenticate.AuthenticateBase
     {
         //依赖注入
         private readonly ILogger<AuthenticationService> _logger;
@@ -16,20 +16,20 @@ namespace Auth.RPC.Services.Authentication
             _distributedCache = distributedCache;
         }
 
-        public override Task<AuthReply> Auth(AuthRequest request, ServerCallContext context)
+        public override Task<AuthJWTReply> AuthJWT(AuthJWTRequest request, ServerCallContext context)
         {
             //验证JWT
             string? currentJWT = _distributedCache.GetString(request.UUID.ToString());
             if (currentJWT == request.JWT)
             {
-                return Task.FromResult(new AuthReply
+                return Task.FromResult(new AuthJWTReply
                 {
                     IsValid = true
                 });
             }
             else
             {
-                return Task.FromResult(new AuthReply
+                return Task.FromResult(new AuthJWTReply
                 {
                     IsValid = false
                 });

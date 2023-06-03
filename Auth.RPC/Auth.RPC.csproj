@@ -10,7 +10,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Protobuf Include="Protos\UserJWT\userJWT.proto" GrpcServices="Server" />
+		<Protobuf Include="Protos\Authentication\authentication.proto" GrpcServices="Server" />
 	</ItemGroup>
 
 	<ItemGroup>
