@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "auth.rpc": "StartDebugging",
+        "user.rpc": "StartDebugging",
+        "message.rpc": "StartDebugging",
+        "feed.rpc": "StartDebugging"
+      }
+    }
+  }
+}

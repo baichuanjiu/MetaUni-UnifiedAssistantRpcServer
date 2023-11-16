@@ -1,0 +1,124 @@
+version: '3.4'
+
+services:
+  auth.rpc:
+    image: ${DOCKER_REGISTRY-}authrpc
+    build:
+      context: .
+      dockerfile: Auth.RPC/Dockerfile
+    ports:
+      - 42222:80
+      - 42223:443
+    environment:
+      TZ: Asia/Shanghai
+      Consul__ID: Auth.RPC.42222
+      Consul__Name: UnifiedAssistant.Auth.RPC
+      Consul__IP: host.docker.internal
+      Consul__Port: 42222
+
+  auth.rpc2:
+    image: ${DOCKER_REGISTRY-}authrpc
+    build:
+      context: .
+      dockerfile: Auth.RPC/Dockerfile
+    ports:
+      - 42224:80
+      - 42225:443
+    environment:
+      TZ: Asia/Shanghai
+      Consul__ID: Auth.RPC.42224
+      Consul__Name: UnifiedAssistant.Auth.RPC
+      Consul__IP: host.docker.internal
+      Consul__Port: 42224
+
+  user.rpc:
+    image: ${DOCKER_REGISTRY-}userrpc
+    build:
+      context: .
+      dockerfile: User.RPC/Dockerfile
+    ports:
+      - 42232:80
+      - 42233:443
+    environment:
+      TZ: Asia/Shanghai
+      Consul__ID: User.RPC.42232
+      Consul__Name: UnifiedAssistant.User.RPC
+      Consul__IP: host.docker.internal
+      Consul__Port: 42232
+
+  user.rpc2:
+    image: ${DOCKER_REGISTRY-}userrpc
+    build:
+      context: .
+      dockerfile: User.RPC/Dockerfile
+    ports:
+      - 42234:80
+      - 42235:443
+    environment:
+      TZ: Asia/Shanghai
+      Consul__ID: User.RPC.42234
+      Consul__Name: UnifiedAssistant.User.RPC
+      Consul__IP: host.docker.internal
+      Consul__Port: 42234
+
+
+  message.rpc:
+    image: ${DOCKER_REGISTRY-}messagerpc
+    build:
+      context: .
+      dockerfile: Message.RPC/Dockerfile
+    ports:
+      - 42242:80
+      - 42243:443
+    environment:
+      TZ: Asia/Shanghai
+      Consul__ID: Message.RPC.42242
+      Consul__Name: UnifiedAssistant.Message.RPC
+      Consul__IP: host.docker.internal
+      Consul__Port: 42242
+
+  message.rpc2:
+    image: ${DOCKER_REGISTRY-}messagerpc
+    build:
+      context: .
+      dockerfile: Message.RPC/Dockerfile
+    ports:
+      - 42244:80
+      - 42245:443
+    environment:
+      TZ: Asia/Shanghai
+      Consul__ID: Message.RPC.42244
+      Consul__Name: UnifiedAssistant.Message.RPC
+      Consul__IP: host.docker.internal
+      Consul__Port: 42244
+
+  feed.rpc:
+    image: ${DOCKER_REGISTRY-}feedrpc
+    build:
+      context: .
+      dockerfile: Feed.RPC/Dockerfile
+    ports:
+      - 42246:80
+      - 42247:443
+    environment:
+      TZ: Asia/Shanghai
+      Consul__ID: Feed.RPC.42246
+      Consul__Name: UnifiedAssistant.Feed.RPC
+      Consul__IP: host.docker.internal
+      Consul__Port: 42246
+
+  feed.rpc2:
+    image: ${DOCKER_REGISTRY-}feedrpc
+    build:
+      context: .
+      dockerfile: Feed.RPC/Dockerfile
+    ports:
+      - 42248:80
+      - 42249:443
+    environment:
+      TZ: Asia/Shanghai
+      Consul__ID: Feed.RPC.42248
+      Consul__Name: UnifiedAssistant.Feed.RPC
+      Consul__IP: host.docker.internal
+      Consul__Port: 42248
+
